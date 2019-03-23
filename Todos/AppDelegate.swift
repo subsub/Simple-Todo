@@ -106,6 +106,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         tasks.removeAll()
         done.removeAll()
         createMenu()
+        if let button = statusItem.button {
+            button.title = "\(self.tasks.count) tasks"
+        }
     }
     
     @objc func showOption(_ menuItem: NSMenuItem) {
