@@ -675,7 +675,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Quotes" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Todos" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -684,7 +684,7 @@
         <!--New Task View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="NewTaskViewController" id="XfG-lQ-9wD" customClass="NewTaskViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewTaskViewController" id="XfG-lQ-9wD" customClass="NewTaskViewController" customModule="Todos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -730,7 +730,7 @@
                                     <date key="date" timeIntervalSinceReferenceDate="571680000">
                                         <!--2019-02-12 4:00:00 PM +0000-->
                                     </date>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
                                 </datePickerCell>
@@ -763,7 +763,7 @@
         <!--Option View Controller-->
         <scene sceneID="r6X-cR-OuY">
             <objects>
-                <viewController storyboardIdentifier="OptionViewController" id="g01-Aq-bHP" customClass="OptionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OptionViewController" id="g01-Aq-bHP" customClass="OptionViewController" customModule="Todos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="3Hu-YS-MEa">
                         <rect key="frame" x="0.0" y="0.0" width="260" height="61"/>
                         <autoresizingMask key="autoresizingMask"/>
