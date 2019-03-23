@@ -19,13 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var eventMonitor: EventMonitor?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        loadData()
         if let button = statusItem.button {
-            done = self.tasks.filter({ (t) -> Bool in
-                t.isDone
-            })
-            tasks.removeAll { (t) -> Bool in
-                t.isDone
-            }
             button.image = NSImage(named: NSImage.Name("checklist"))
             button.imagePosition = NSControl.ImagePosition.imageLeading
             button.title = "\(self.tasks.count) tasks"
@@ -47,7 +42,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        saveData()
+    }
+    
+    func saveData() {
+        let jsonEncoder = JSONEncoder()
+        let jsonDataTask = try! jsonEncoder.encode(tasks)
+        let jsonDataDone = try! jsonEncoder.encode(done)
+        let tasksJson = String(data: jsonDataTask, encoding: String.Encoding.utf8)
+        let doneJson = String(data: jsonDataDone, encoding: String.Encoding.utf8)
+        
+        UserDefaults().set(tasksJson, forKey: "tasks")
+        UserDefaults().set(doneJson, forKey: "done")
+    }
+    
+    func loadData() {
+        let jsonDecoder = JSONDecoder()
+        let tasksJson = UserDefaults().string(forKey: "tasks") ?? "[]"
+        let doneJson = UserDefaults().string(forKey: "done") ?? "[]"
+        let tasksData = tasksJson.data(using: String.Encoding.utf8)
+        let doneData = doneJson.data(using: String.Encoding.utf8)
+        if tasksData != nil {
+            self.tasks = try! jsonDecoder.decode([Task].self, from: tasksData!)
+        }
+        if doneData != nil {
+            self.done = try! jsonDecoder.decode([Task].self, from: doneData!)
+        }
     }
     
     func createMenu() {
@@ -80,10 +100,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Done", action: nil, keyEquivalent: ""))
         for task in done {
-            let menuItem = NSMenuItem(title: String(describing: task.description), action: #selector(AppDelegate.showOption(_:)), keyEquivalent: "")
-            menuItem.attributedTitle = NSAttributedString(string: String(describing: task.description))
-            let image = NSImage(named: NSImage.Name("checkBoxChecked"))
-            menuItem.image = image
+            let menuItem = NSMenuItem(title: String(describing: task.description), action: nil, keyEquivalent: "")
+            menuItem.attributedTitle = NSAttributedString(string: "\(task.title)")
+            menuItem.image = NSImage(named: NSImage.Name("checkBoxChecked"))
             menu.addItem(menuItem)
         }
         menu.addItem(NSMenuItem.separator())
@@ -138,12 +157,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     })
                     let menuItem = NSMenuItem(title: String(describing: task.description), action: nil, keyEquivalent: "")
                     menuItem.attributedTitle = NSAttributedString(string: "\(task.title)")
-                    menuItem.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-                    let image = NSImage(named: NSImage.Name("checkBoxChecked"))
-                    menuItem.image = image
+                    menuItem.image = NSImage(named: NSImage.Name("checkBoxChecked"))
                     self.statusItem.menu?.removeItem(at: index + 2)
                     self.statusItem.menu?.insertItem(menuItem, at: menu.items.count - 5)
                     menu.update()
+                    self.saveData()
                 }
                 
                 if let button = self.statusItem.button {
@@ -182,14 +200,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }) ?? index
             let menuItem = NSMenuItem(title: String(describing: newTask.description), action: #selector(AppDelegate.showOption(_:)), keyEquivalent: "")
             menuItem.attributedTitle = NSAttributedString(string: String(describing: newTask.description))
-            menuItem.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-            let image = NSImage(named: NSImage.Name("checkBox"))
-            menuItem.image = image
+            menuItem.image = NSImage(named: NSImage.Name("checkBox"))
             self.statusItem.menu?.removeItem(at: index + 2)
             self.statusItem.menu?.insertItem(menuItem, at: newIndex + 2)
             if let button = self.statusItem.button {
                 button.title = "\(self.tasks.count) tasks"
             }
+            self.saveData()
         }
         popover.contentViewController = viewcontroller
         if let button = statusItem.button {
@@ -232,6 +249,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let button = self.statusItem.button {
                 button.title = "\(self.tasks.count) tasks"
             }
+            self.saveData()
         }
         popover.contentViewController = viewcontroller
         if let button = statusItem.button {
