@@ -70,11 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    func createMenu() {
-        let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Add Task", action: #selector(AppDelegate.addTask(_:)), keyEquivalent: "A"))
-        menu.addItem(NSMenuItem.separator())
-        
+    func sortTask() {
         tasks.sort(by: { (task1, task2) -> Bool in
             if task1.time == nil || task2.time == nil {
                 var t1 = 1
@@ -95,7 +91,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         })
         done.sort(by: { (task1, task2) -> Bool in
             if task1.time == nil || task2.time == nil {
-                return true
+                var t1 = 1
+                var t2 = 1
+                if task1.time == nil {
+                    t1 *= 10
+                }
+                if task2.time == nil {
+                    t2 *= 10
+                }
+                return t1 < t2
             }
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy HH.mm"
@@ -103,21 +107,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let time2 = formatter.date(from: task2.time!) ?? Date()
             return time1 < time2
         })
+    }
+    
+    func createMenuTask(task: Task, action: Selector?) -> NSMenuItem{
+        let menuItem = NSMenuItem(title: String(describing: task.description), action: action, keyEquivalent: "")
+        menuItem.attributedTitle = NSAttributedString(string: String(describing: task.description))
+        var image = NSImage(named: NSImage.Name("checkBox"))
+        if task.isDone {
+            menuItem.attributedTitle = NSAttributedString(string: "\(task.title)")
+            image = NSImage(named: NSImage.Name("checkBoxChecked"))
+        }
+        menuItem.image = image
+        return menuItem
+    }
+    
+    func createMenu() {
+        let menu = NSMenu()
+        menu.addItem(NSMenuItem(title: "Add Task", action: #selector(AppDelegate.addTask(_:)), keyEquivalent: "A"))
+        menu.addItem(NSMenuItem.separator())
+        
+        sortTask()
         for task in tasks {
-            let menuItem = NSMenuItem(title: String(describing: task.description), action: #selector(AppDelegate.showOption(_:)), keyEquivalent: "")
-            menuItem.attributedTitle = NSAttributedString(string: String(describing: task.description))
-            let image = NSImage(named: NSImage.Name("checkBox"))
-            menuItem.image = image
-            menu.addItem(menuItem)
+            menu.addItem(self.createMenuTask(task: task, action: #selector(AppDelegate.showOption(_:))))
         }
         
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Done", action: nil, keyEquivalent: ""))
         for task in done {
-            let menuItem = NSMenuItem(title: String(describing: task.description), action: nil, keyEquivalent: "")
-            menuItem.attributedTitle = NSAttributedString(string: "\(task.title)")
-            menuItem.image = NSImage(named: NSImage.Name("checkBoxChecked"))
-            menu.addItem(menuItem)
+            menu.addItem(self.createMenuTask(task: task, action: nil))
         }
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Delete All Done", action: #selector(AppDelegate.deleteAllDone(_:)), keyEquivalent: ""))
@@ -162,27 +179,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     task.isDone = true
                     self.tasks.remove(at: index)
                     self.done.append(task)
-                    self.done.sort(by: { (task1, task2) -> Bool in
-                        if task1.time == nil || task2.time == nil {
-                            var t1 = 1
-                            var t2 = 1
-                            if task1.time == nil {
-                                t1 *= 10
-                            }
-                            if task2.time == nil {
-                                t2 *= 10
-                            }
-                            return t1 < t2
-                        }
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                        let time1 = formatter.date(from: task1.time!) ?? Date()
-                        let time2 = formatter.date(from: task2.time!) ?? Date()
-                        return time1 < time2
-                    })
-                    let menuItem = NSMenuItem(title: String(describing: task.description), action: nil, keyEquivalent: "")
-                    menuItem.attributedTitle = NSAttributedString(string: "\(task.title)")
-                    menuItem.image = NSImage(named: NSImage.Name("checkBoxChecked"))
+                    self.sortTask()
+                    let menuItem = self.createMenuTask(task: task, action: nil)
                     self.statusItem.menu?.removeItem(at: index + 2)
                     self.statusItem.menu?.insertItem(menuItem, at: menu.items.count - 5)
                     menu.update()
@@ -217,30 +215,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             let newTask = Task(id: task.id, title: title, time: tm, location: nil, isDone: task.isDone)
             self.tasks[index] = newTask
-            self.tasks.sort(by: { (task1, task2) -> Bool in
-                if task1.time == nil || task2.time == nil {
-                    var t1 = 1
-                    var t2 = 1
-                    if task1.time == nil {
-                        t1 *= 10
-                    }
-                    if task2.time == nil {
-                        t2 *= 10
-                    }
-                    return t1 < t2
-                }
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                let time1 = formatter.date(from: task1.time!) ?? Date()
-                let time2 = formatter.date(from: task2.time!) ?? Date()
-                return time1 < time2
-            })
+            self.sortTask()
             let newIndex = self.tasks.firstIndex(where: { (task) -> Bool in
                 task.id == newTask.id
             }) ?? index
-            let menuItem = NSMenuItem(title: String(describing: newTask.description), action: #selector(AppDelegate.showOption(_:)), keyEquivalent: "")
-            menuItem.attributedTitle = NSAttributedString(string: String(describing: newTask.description))
-            menuItem.image = NSImage(named: NSImage.Name("checkBox"))
+            let menuItem = self.createMenuTask(task: newTask, action: #selector(AppDelegate.showOption(_:)))
             self.statusItem.menu?.removeItem(at: index + 2)
             self.statusItem.menu?.insertItem(menuItem, at: newIndex + 2)
             if let button = self.statusItem.button {
@@ -273,34 +252,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             let newTask = Task(id: self.tasks.count, title: title, time: tm, location: nil, isDone: false)
             self.tasks.append(newTask)
-            self.tasks.sort(by: { (task1, task2) -> Bool in
-                if task1.time == nil || task2.time == nil {
-                    var t1 = 1
-                    var t2 = 1
-                    if task1.time == nil {
-                        t1 *= 10
-                    }
-                    if task2.time == nil {
-                        t2 *= 10
-                    }
-                    return t1 < t2
-                }
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                let time1 = formatter.date(from: task1.time!) ?? Date()
-                let time2 = formatter.date(from: task2.time!) ?? Date()
-                return time1 < time2
-            })
+            self.sortTask()
             let index = self.tasks.firstIndex(where: { (task) -> Bool in
                 task.id == newTask.id
             }) ?? self.tasks.count
-            let menuItem = NSMenuItem(title: String(describing: newTask.description), action: #selector(AppDelegate.showOption(_:)), keyEquivalent: "")
-            menuItem.attributedTitle = NSAttributedString(string: String(describing: newTask.description))
-            var image = NSImage(named: NSImage.Name("checkBox"))
-            if newTask.isDone {
-                image = NSImage(named: NSImage.Name("checkBoxChecked"))
-            }
-            menuItem.image = image
+            let menuItem = self.createMenuTask(task: newTask, action: #selector(AppDelegate.showOption(_:)))
             self.statusItem.menu?.insertItem(menuItem, at: index + 2)
             if let button = self.statusItem.button {
                 button.title = "\(self.tasks.count) tasks"
@@ -319,21 +275,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("Aku ke print")
     }
 
-//    @objc func togglePopOver(_ sender: Any?) {
-//        if popover.isShown {
-//            closePopover(sender: sender)
-//        } else {
-//            showPopover(sender: sender)
-//        }
-//    }
-//
-//    func showPopover(sender: Any?) {
-//        if let button = statusItem.button {
-//            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-//        }
-//        eventMonitor?.start()
-//    }
-//
     func closePopover(sender: Any?) {
         popovers.forEach { (popover) in
             popover.performClose(sender)
