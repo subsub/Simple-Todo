@@ -76,17 +76,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
         
         tasks.sort(by: { (task1, task2) -> Bool in
+            if task1.time == nil || task2.time == nil {
+                var t1 = 1
+                var t2 = 1
+                if task1.time == nil {
+                    t1 *= 10
+                }
+                if task2.time == nil {
+                    t2 *= 10
+                }
+                return t1 < t2
+            }
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy HH.mm"
-            let time1 = formatter.date(from: task1.time) ?? Date()
-            let time2 = formatter.date(from: task2.time) ?? Date()
+            let time1 = formatter.date(from: task1.time!) ?? Date()
+            let time2 = formatter.date(from: task2.time!) ?? Date()
             return time1 < time2
         })
         done.sort(by: { (task1, task2) -> Bool in
+            if task1.time == nil || task2.time == nil {
+                return true
+            }
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy HH.mm"
-            let time1 = formatter.date(from: task1.time) ?? Date()
-            let time2 = formatter.date(from: task2.time) ?? Date()
+            let time1 = formatter.date(from: task1.time!) ?? Date()
+            let time2 = formatter.date(from: task2.time!) ?? Date()
             return time1 < time2
         })
         for task in tasks {
@@ -149,10 +163,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.tasks.remove(at: index)
                     self.done.append(task)
                     self.done.sort(by: { (task1, task2) -> Bool in
+                        if task1.time == nil || task2.time == nil {
+                            var t1 = 1
+                            var t2 = 1
+                            if task1.time == nil {
+                                t1 *= 10
+                            }
+                            if task2.time == nil {
+                                t2 *= 10
+                            }
+                            return t1 < t2
+                        }
                         let formatter = DateFormatter()
                         formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                        let time1 = formatter.date(from: task1.time) ?? Date()
-                        let time2 = formatter.date(from: task2.time) ?? Date()
+                        let time1 = formatter.date(from: task1.time!) ?? Date()
+                        let time2 = formatter.date(from: task2.time!) ?? Date()
                         return time1 < time2
                     })
                     let menuItem = NSMenuItem(title: String(describing: task.description), action: nil, keyEquivalent: "")
@@ -182,17 +207,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func editTask(index: Int, task: Task) {
         let popover = NSPopover()
-        let viewcontroller = NewTaskViewController.freshController { title, time, sender in
+        let viewcontroller = NewTaskViewController.freshController { title, time, isUseTime, sender in
             popover.performClose(sender)
             
             // add menu
-            let newTask = Task(id: task.id, title: title, time: time, location: nil, isDone: task.isDone)
+            var tm: String? = time
+            if !isUseTime {
+                tm = nil
+            }
+            let newTask = Task(id: task.id, title: title, time: tm, location: nil, isDone: task.isDone)
             self.tasks[index] = newTask
             self.tasks.sort(by: { (task1, task2) -> Bool in
+                if task1.time == nil || task2.time == nil {
+                    var t1 = 1
+                    var t2 = 1
+                    if task1.time == nil {
+                        t1 *= 10
+                    }
+                    if task2.time == nil {
+                        t2 *= 10
+                    }
+                    return t1 < t2
+                }
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                let time1 = formatter.date(from: task1.time) ?? Date()
-                let time2 = formatter.date(from: task2.time) ?? Date()
+                let time1 = formatter.date(from: task1.time!) ?? Date()
+                let time2 = formatter.date(from: task2.time!) ?? Date()
                 return time1 < time2
             })
             let newIndex = self.tasks.firstIndex(where: { (task) -> Bool in
@@ -214,6 +254,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         viewcontroller.setTitle(title: task.title)
+        viewcontroller.setIncludeTime(include: task.time != nil)
         viewcontroller.setTime(time: task.time)
         viewcontroller.addButton.title = "Save Task"
         popovers.append(popover)
@@ -222,17 +263,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func addTask(_ sender: Any?) {
         let popover = NSPopover()
-        let viewcontroller = NewTaskViewController.freshController { title, time, sender in
+        let viewcontroller = NewTaskViewController.freshController { title, time, isUseTime, sender in
             popover.performClose(sender)
             
             // add menu
-            let newTask = Task(id: self.tasks.count, title: title, time: time, location: nil, isDone: false)
+            var tm: String? = time
+            if !isUseTime {
+                tm = nil
+            }
+            let newTask = Task(id: self.tasks.count, title: title, time: tm, location: nil, isDone: false)
             self.tasks.append(newTask)
             self.tasks.sort(by: { (task1, task2) -> Bool in
+                if task1.time == nil || task2.time == nil {
+                    var t1 = 1
+                    var t2 = 1
+                    if task1.time == nil {
+                        t1 *= 10
+                    }
+                    if task2.time == nil {
+                        t2 *= 10
+                    }
+                    return t1 < t2
+                }
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd/MM/yyyy HH.mm"
-                let time1 = formatter.date(from: task1.time) ?? Date()
-                let time2 = formatter.date(from: task2.time) ?? Date()
+                let time1 = formatter.date(from: task1.time!) ?? Date()
+                let time2 = formatter.date(from: task2.time!) ?? Date()
                 return time1 < time2
             })
             let index = self.tasks.firstIndex(where: { (task) -> Bool in

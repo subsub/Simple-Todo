@@ -11,7 +11,7 @@ import Foundation
 struct Task: Codable {
     let id: Int
     let title: String
-    let time: String
+    let time: String?
     let location: String?
     var isDone: Bool = false
     
@@ -21,6 +21,10 @@ struct Task: Codable {
 
 extension Task: CustomStringConvertible {
     var description: String {
-        return "\(title) \n\(time)"
+        var tm = ""
+        if time != nil {
+            tm = "\n\(time ?? "")"
+        }
+        return "\(title) \(tm)"
     }
 }

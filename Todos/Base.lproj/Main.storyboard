@@ -723,8 +723,8 @@
                                     <action selector="addTask:" target="XfG-lQ-9wD" id="oNT-vZ-lwX"/>
                                 </connections>
                             </button>
-                            <datePicker verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-KO-JQJ">
-                                <rect key="frame" x="68" y="60" width="139" height="27"/>
+                            <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-KO-JQJ">
+                                <rect key="frame" x="68" y="60" width="164" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="c6t-hW-YLF">
                                     <font key="font" metaFont="system"/>
                                     <date key="date" timeIntervalSinceReferenceDate="571680000">
@@ -735,13 +735,22 @@
                                     <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
                                 </datePickerCell>
                             </datePicker>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E02-az-yEw">
+                                <rect key="frame" x="235" y="63" width="22" height="18"/>
+                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="wSi-3r-bhh">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="thH-Cm-w30" firstAttribute="top" secondItem="Iez-ER-fuD" secondAttribute="bottom" constant="25" id="1Zq-rH-sSZ"/>
                             <constraint firstAttribute="bottom" secondItem="uq3-GU-FDJ" secondAttribute="bottom" constant="20" id="2nr-gG-5uJ"/>
+                            <constraint firstItem="E02-az-yEw" firstAttribute="top" secondItem="BTh-mK-SP7" secondAttribute="bottom" constant="24" id="FwH-KU-RtM"/>
                             <constraint firstItem="uq3-GU-FDJ" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="JWP-mc-iu7"/>
                             <constraint firstItem="eoI-KO-JQJ" firstAttribute="top" secondItem="BTh-mK-SP7" secondAttribute="bottom" constant="20" id="K17-z8-cfd"/>
                             <constraint firstAttribute="trailing" secondItem="BTh-mK-SP7" secondAttribute="trailing" constant="20" id="Kj1-dr-Bci"/>
+                            <constraint firstItem="E02-az-yEw" firstAttribute="leading" secondItem="eoI-KO-JQJ" secondAttribute="trailing" constant="8" id="XUm-St-bv5"/>
                             <constraint firstItem="BTh-mK-SP7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="buM-rT-v5E"/>
                             <constraint firstItem="BTh-mK-SP7" firstAttribute="leading" secondItem="Iez-ER-fuD" secondAttribute="trailing" constant="20" id="ex8-Hb-3Ax"/>
                             <constraint firstItem="Iez-ER-fuD" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="pER-0t-Ciq"/>
@@ -754,6 +763,7 @@
                         <outlet property="addButton" destination="uq3-GU-FDJ" id="YUN-Tp-fZ9"/>
                         <outlet property="taskTime" destination="eoI-KO-JQJ" id="PSF-PF-K1h"/>
                         <outlet property="taskTitle" destination="BTh-mK-SP7" id="Iev-fv-WSn"/>
+                        <outlet property="useTimeCheckbox" destination="E02-az-yEw" id="EFk-Ee-wCA"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
