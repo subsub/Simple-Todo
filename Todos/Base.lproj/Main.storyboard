@@ -686,11 +686,11 @@
             <objects>
                 <viewController storyboardIdentifier="NewTaskViewController" id="XfG-lQ-9wD" customClass="NewTaskViewController" customModule="Todos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="145"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="295"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTh-mK-SP7">
-                                <rect key="frame" x="68" y="103" width="392" height="22"/>
+                                <rect key="frame" x="68" y="253" width="392" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="wOn-fp-8eI">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -698,7 +698,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iez-ER-fuD">
-                                <rect key="frame" x="18" y="108" width="32" height="17"/>
+                                <rect key="frame" x="18" y="258" width="32" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Task" id="Q5f-A3-Esw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -706,26 +706,16 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="thH-Cm-w30">
-                                <rect key="frame" x="18" y="66" width="34" height="17"/>
+                                <rect key="frame" x="18" y="216" width="34" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Time" id="7L3-e7-aus">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uq3-GU-FDJ">
-                                <rect key="frame" x="192" y="13" width="96" height="32"/>
-                                <buttonCell key="cell" type="push" title="Add Task" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="O6p-cX-pXD">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="addTask:" target="XfG-lQ-9wD" id="oNT-vZ-lwX"/>
-                                </connections>
-                            </button>
                             <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-KO-JQJ">
-                                <rect key="frame" x="68" y="60" width="164" height="27"/>
-                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="c6t-hW-YLF">
+                                <rect key="frame" x="68" y="61" width="277" height="148"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="c6t-hW-YLF">
                                     <font key="font" metaFont="system"/>
                                     <date key="date" timeIntervalSinceReferenceDate="571680000">
                                         <!--2019-02-12 4:00:00 PM +0000-->
@@ -736,25 +726,36 @@
                                 </datePickerCell>
                             </datePicker>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E02-az-yEw">
-                                <rect key="frame" x="235" y="63" width="22" height="18"/>
+                                <rect key="frame" x="66" y="215" width="22" height="18"/>
                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="wSi-3r-bhh">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uq3-GU-FDJ">
+                                <rect key="frame" x="192" y="13" width="96" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Task" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="O6p-cX-pXD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addTask:" target="XfG-lQ-9wD" id="oNT-vZ-lwX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="thH-Cm-w30" firstAttribute="top" secondItem="Iez-ER-fuD" secondAttribute="bottom" constant="25" id="1Zq-rH-sSZ"/>
                             <constraint firstAttribute="bottom" secondItem="uq3-GU-FDJ" secondAttribute="bottom" constant="20" id="2nr-gG-5uJ"/>
-                            <constraint firstItem="E02-az-yEw" firstAttribute="top" secondItem="BTh-mK-SP7" secondAttribute="bottom" constant="24" id="FwH-KU-RtM"/>
+                            <constraint firstItem="E02-az-yEw" firstAttribute="leading" secondItem="thH-Cm-w30" secondAttribute="trailing" constant="18" id="6a7-y4-mri"/>
+                            <constraint firstItem="eoI-KO-JQJ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="68" id="AbR-SA-CbT"/>
+                            <constraint firstItem="uq3-GU-FDJ" firstAttribute="top" secondItem="eoI-KO-JQJ" secondAttribute="bottom" constant="20" id="FDc-Vt-i60"/>
                             <constraint firstItem="uq3-GU-FDJ" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="JWP-mc-iu7"/>
-                            <constraint firstItem="eoI-KO-JQJ" firstAttribute="top" secondItem="BTh-mK-SP7" secondAttribute="bottom" constant="20" id="K17-z8-cfd"/>
                             <constraint firstAttribute="trailing" secondItem="BTh-mK-SP7" secondAttribute="trailing" constant="20" id="Kj1-dr-Bci"/>
-                            <constraint firstItem="E02-az-yEw" firstAttribute="leading" secondItem="eoI-KO-JQJ" secondAttribute="trailing" constant="8" id="XUm-St-bv5"/>
+                            <constraint firstItem="E02-az-yEw" firstAttribute="top" secondItem="BTh-mK-SP7" secondAttribute="bottom" constant="22" id="U9V-67-cr5"/>
                             <constraint firstItem="BTh-mK-SP7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="buM-rT-v5E"/>
                             <constraint firstItem="BTh-mK-SP7" firstAttribute="leading" secondItem="Iez-ER-fuD" secondAttribute="trailing" constant="20" id="ex8-Hb-3Ax"/>
+                            <constraint firstItem="eoI-KO-JQJ" firstAttribute="top" secondItem="E02-az-yEw" secondAttribute="bottom" constant="8" id="gW8-bA-G3l"/>
                             <constraint firstItem="Iez-ER-fuD" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="pER-0t-Ciq"/>
-                            <constraint firstItem="eoI-KO-JQJ" firstAttribute="leading" secondItem="thH-Cm-w30" secondAttribute="trailing" constant="18" id="q7b-54-Fbn"/>
                             <constraint firstItem="Iez-ER-fuD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="qWp-Q3-xkE"/>
                             <constraint firstItem="thH-Cm-w30" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="yaD-94-La7"/>
                         </constraints>
@@ -768,7 +769,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="654.5"/>
+            <point key="canvasLocation" x="75" y="822.5"/>
         </scene>
         <!--Option View Controller-->
         <scene sceneID="r6X-cR-OuY">
