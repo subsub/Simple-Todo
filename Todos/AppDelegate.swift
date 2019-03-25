@@ -17,7 +17,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var popovers: [NSPopover] = []
     var eventMonitor: EventMonitor?
-
+    
+    @IBOutlet weak var mainMenu: NSMenu!
+    @IBOutlet weak var menuDone: NSMenuItem!
+    @IBOutlet weak var menuSeparator: NSMenuItem!
+    
+    @IBAction func onNewTaskClick(_ sender: NSMenuItem) {
+        addTask(sender)
+    }
+    @IBAction func onDeleteAllDoneClick(_ sender: NSMenuItem) {
+        deleteAllDone(sender)
+    }
+    @IBAction func onDeleteAllClick(_ sender: NSMenuItem) {
+        deleteAll(sender)
+    }
+    @IBAction func onQuitClick(_ sender: NSMenuItem) {
+        NSApplication.shared.terminate(sender)
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         loadData()
         if let button = statusItem.button {
@@ -27,8 +44,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         createMenu()
-        
-//        popover.contentViewController = QuotesViewControllwer.freshController()
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             if let strongSelf = self {
@@ -122,26 +137,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func createMenu() {
-        let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Add Task", action: #selector(AppDelegate.addTask(_:)), keyEquivalent: "A"))
-        menu.addItem(NSMenuItem.separator())
-        
         sortTask()
         for task in tasks {
-            menu.addItem(self.createMenuTask(task: task, action: #selector(AppDelegate.showOption(_:))))
+            let index = mainMenu.index(of: menuSeparator)
+            mainMenu.insertItem(self.createMenuTask(task: task, action: #selector(AppDelegate.showOption(_:))), at: index + 1)
         }
-        
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Done", action: nil, keyEquivalent: ""))
         for task in done {
-            menu.addItem(self.createMenuTask(task: task, action: nil))
+            let index = mainMenu.index(of: menuDone)
+            mainMenu.insertItem(self.createMenuTask(task: task, action: nil), at: index + 1)
         }
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Delete All Done", action: #selector(AppDelegate.deleteAllDone(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Delete All", action: #selector(AppDelegate.deleteAll(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        statusItem.menu = menu
+        statusItem.menu = mainMenu
     }
     
     @objc func deleteAllDone(_ sender: Any?) {

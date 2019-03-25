@@ -675,9 +675,46 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Todos" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Todos" customModuleProvider="target">
+                    <connections>
+                        <outlet property="mainMenu" destination="BEu-ZN-IY4" id="ocC-0F-q4h"/>
+                        <outlet property="menuDone" destination="ttk-L4-47a" id="GNJ-En-5gD"/>
+                        <outlet property="menuSeparator" destination="JdV-e6-OrN" id="FMj-QK-jIl"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="BEu-ZN-IY4">
+                    <items>
+                        <menuItem title="New Task" keyEquivalent="n" id="tKd-jg-ftN">
+                            <connections>
+                                <action selector="onNewTaskClick:" target="Voe-Tx-rLC" id="CIh-Vd-Qqf"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="JdV-e6-OrN"/>
+                        <menuItem isSeparatorItem="YES" id="t02-pW-ukg"/>
+                        <menuItem title="Done" enabled="NO" id="ttk-L4-47a">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="9Ay-6x-lYM"/>
+                        <menuItem title="Delete All Done" keyEquivalent="d" id="Eev-Ua-8Td">
+                            <connections>
+                                <action selector="onDeleteAllDoneClick:" target="Voe-Tx-rLC" id="J3z-Zi-kO1"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Delete All" keyEquivalent="D" id="uD6-ye-0sn">
+                            <connections>
+                                <action selector="onDeleteAllClick:" target="Voe-Tx-rLC" id="Wwz-zW-ZHd"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Jbg-Nw-0Db"/>
+                        <menuItem title="Quit" keyEquivalent="q" id="pT7-V0-WPy">
+                            <connections>
+                                <action selector="onQuitClick:" target="Voe-Tx-rLC" id="H4c-V4-aOM"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
