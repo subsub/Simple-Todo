@@ -138,9 +138,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func createMenu() {
         sortTask()
+        var index = mainMenu.index(of: menuSeparator) + 1
         for task in tasks {
-            let index = mainMenu.index(of: menuSeparator)
-            mainMenu.insertItem(self.createMenuTask(task: task, action: #selector(AppDelegate.showOption(_:))), at: index + 1)
+            mainMenu.insertItem(self.createMenuTask(task: task, action: #selector(AppDelegate.showOption(_:))), at: index)
+            index += 1
         }
         for task in done {
             let index = mainMenu.index(of: menuDone)
