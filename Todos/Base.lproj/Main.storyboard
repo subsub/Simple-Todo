@@ -752,7 +752,7 @@
                             </textField>
                             <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-KO-JQJ">
                                 <rect key="frame" x="68" y="61" width="277" height="148"/>
-                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="c6t-hW-YLF">
+                                <datePickerCell key="cell" alignment="left" drawsBackground="NO" datePickerStyle="clockAndCalendar" id="c6t-hW-YLF">
                                     <font key="font" metaFont="system"/>
                                     <date key="date" timeIntervalSinceReferenceDate="571680000">
                                         <!--2019-02-12 4:00:00 PM +0000-->
