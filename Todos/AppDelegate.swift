@@ -9,14 +9,17 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-
+class AppDelegate: NSObject, NSApplicationDelegate, MenuDelegate {
+    var preference: PreferenceModel = PreferenceModel.defaultPref()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     var tasks: [Task] = Task.all
     var done: [Task] = Task.all
     
     var popovers: [NSPopover] = []
     var eventMonitor: EventMonitor?
+    
+    private var beautifulWindowController: BeautifulWindow? = nil
+    
     
     @IBOutlet weak var mainMenu: NSMenu!
     @IBOutlet weak var menuDone: NSMenuItem!
@@ -34,9 +37,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func onQuitClick(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(sender)
     }
+    @IBAction func onPreferenceClick(_ sender: NSMenuItem) {
+        openPreference()
+    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         loadData()
+        
         if let button = statusItem.button {
             button.image = NSImage(named: NSImage.Name("checklist"))
             button.imagePosition = NSControl.ImagePosition.imageLeading
@@ -47,11 +54,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             if let strongSelf = self {
+                strongSelf.closeBeautifulWindow()
                 strongSelf.popovers.forEach({ (popover) in
                     if popover.isShown {
                         strongSelf.closePopover(sender: event)
                     }
                 })
+            }
+        }
+    }
+    
+    func createBeautifulLayout() {
+        var rect: NSRect = NSRect(x: 0, y: 0, width: 100, height: 100)
+        if let button = statusItem.button {
+            rect = button.window?.frame ?? rect
+        }
+        beautifulWindowController = NSStoryboard(name: "BeautifulLayout", bundle: nil).instantiateController(withIdentifier: "BeautifulLayout") as? BeautifulWindow
+        beautifulWindowController?.setRect(rect: rect)
+    }
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        loadPreference()
+        if preference.useDynamicLayout {
+            menu.items.forEach { (item) in
+                item.isHidden = true
+            }
+            if beautifulWindowController?.isVisible != true {
+                openBeautifulWindow()
+            }
+        } else {
+            menu.items.forEach { (item) in
+                item.isHidden = false
             }
         }
     }
@@ -72,6 +105,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func loadData() {
+        // Load Preference
+        loadPreference()
+        
         let jsonDecoder = JSONDecoder()
         let tasksJson = UserDefaults().string(forKey: "tasks") ?? "[]"
         let doneJson = UserDefaults().string(forKey: "done") ?? "[]"
@@ -82,6 +118,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         if doneData != nil {
             self.done = try! jsonDecoder.decode([Task].self, from: doneData!)
+        }
+    }
+    
+    private func loadPreference() {
+        let jsonDecoder = JSONDecoder()
+        let prefJson = UserDefaults().string(forKey: "preference") ?? ""
+        let prefData = prefJson.data(using: String.Encoding.utf8)
+        if prefData != nil {
+            if let pref = try? jsonDecoder.decode(PreferenceModel.self, from: prefData!) {
+                self.preference = pref
+            } else {
+                self.preference = PreferenceModel.defaultPref()
+            }
         }
     }
     
@@ -148,6 +197,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             mainMenu.insertItem(self.createMenuTask(task: task, action: nil), at: index + 1)
         }
         statusItem.menu = mainMenu
+        mainMenu.delegate = self
     }
     
     @objc func deleteAllDone(_ sender: Any?) {
@@ -277,6 +327,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor?.start()
     }
     
+    func openPreference() {
+        let preferenceWindowController = NSStoryboard(name: "Preferences", bundle: nil).instantiateController(withIdentifier: "preferences") as? PreferencesWindowController
+        preferenceWindowController?.showWindow(self)
+    }
+    
+    @objc func openBeautifulWindow() {
+        createBeautifulLayout()
+        beautifulWindowController?.showWindow(self)
+        eventMonitor?.start()
+    }
+    
     @objc func printQuote(_ sender: Any?) {
         print("Aku ke print")
     }
@@ -286,6 +347,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             popover.performClose(sender)
         }
         eventMonitor?.stop()
+    }
+    
+    func closeBeautifulWindow() {
+        beautifulWindowController?.close()
     }
 
 }

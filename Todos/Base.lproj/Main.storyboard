@@ -697,6 +697,12 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="9Ay-6x-lYM"/>
+                        <menuItem title="Preferences..." keyEquivalent="," id="TZr-py-ThV">
+                            <connections>
+                                <action selector="onPreferenceClick:" target="Voe-Tx-rLC" id="DLX-f8-LDZ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Wfr-gf-VPv"/>
                         <menuItem title="Delete All Done" keyEquivalent="d" id="Eev-Ua-8Td">
                             <connections>
                                 <action selector="onDeleteAllDoneClick:" target="Voe-Tx-rLC" id="J3z-Zi-kO1"/>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="i3E-QG-Moj">
+            <objects>
+                <windowController storyboardIdentifier="preferences" id="zA7-5H-Szg" customClass="PreferencesWindowController" customModule="Todos" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Wpf-sf-fbu">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="249" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+                        <connections>
+                            <outlet property="delegate" destination="zA7-5H-Szg" id="dVK-F9-uxf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="Mq0-nG-79R" kind="relationship" relationship="window.shadowedContentViewController" id="esA-Xc-8wR"/>
+                    </connections>
+                </windowController>
+                <customObject id="Vt5-7I-yeU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-73" y="55"/>
+        </scene>
+        <!--Preference View Controller-->
+        <scene sceneID="BOz-eG-BoJ">
+            <objects>
+                <viewController id="Mq0-nG-79R" customClass="PreferenceViewController" customModule="Todos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Nt8-Tm-ZJg">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="114"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1zV-hy-yq5">
+                                <rect key="frame" x="60" y="40" width="360" height="34"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kzh-bs-NPs">
+                                        <rect key="frame" x="8" y="8" width="344" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Use Beautiful Layout" bezelStyle="regularSquare" imagePosition="trailing" inset="2" id="wqz-d2-hkK">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="onUseBeautifulLayoutCheck:" target="Mq0-nG-79R" id="CJk-0g-BLr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kzh-bs-NPs" firstAttribute="leading" secondItem="1zV-hy-yq5" secondAttribute="leading" constant="10" id="GiK-Ld-cSI"/>
+                                    <constraint firstAttribute="bottom" secondItem="kzh-bs-NPs" secondAttribute="bottom" constant="10" id="hRx-vR-l4e"/>
+                                    <constraint firstItem="kzh-bs-NPs" firstAttribute="top" secondItem="1zV-hy-yq5" secondAttribute="top" constant="10" id="icU-mJ-qve"/>
+                                    <constraint firstAttribute="trailing" secondItem="kzh-bs-NPs" secondAttribute="trailing" constant="10" id="nLL-gt-3As"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1zV-hy-yq5" secondAttribute="bottom" constant="40" id="Dgf-cJ-9dv"/>
+                            <constraint firstAttribute="trailing" secondItem="1zV-hy-yq5" secondAttribute="trailing" constant="60" id="FEn-f9-HeP"/>
+                            <constraint firstItem="1zV-hy-yq5" firstAttribute="leading" secondItem="Nt8-Tm-ZJg" secondAttribute="leading" constant="60" id="M1u-dL-YHb"/>
+                            <constraint firstItem="1zV-hy-yq5" firstAttribute="top" secondItem="Nt8-Tm-ZJg" secondAttribute="top" constant="40" id="Wkt-XP-unj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="checkUseBeautifulLayout" destination="kzh-bs-NPs" id="uHN-Pi-gqK"/>
+                    </connections>
+                </viewController>
+                <customObject id="Ujs-CN-gei" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="539" y="55"/>
+        </scene>
+    </scenes>
+</document>

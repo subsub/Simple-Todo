@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B21A19CD224A92A00001EEC0 /* WindowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21A19CC224A92A00001EEC0 /* WindowDelegate.swift */; };
 		B2C20A9922463DC800A8AF92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C20A9822463DC800A8AF92 /* AppDelegate.swift */; };
 		B2C20A9B22463DC800A8AF92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C20A9A22463DC800A8AF92 /* ViewController.swift */; };
 		B2C20A9D22463DC900A8AF92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C20A9C22463DC900A8AF92 /* Assets.xcassets */; };
@@ -15,9 +16,18 @@
 		B2C20AAF2246528000A8AF92 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C20AAE2246528000A8AF92 /* Task.swift */; };
 		B2C20AB122465A5E00A8AF92 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C20AB022465A5E00A8AF92 /* NewTaskViewController.swift */; };
 		B2C20AB32246647300A8AF92 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C20AB22246647300A8AF92 /* OptionViewController.swift */; };
+		B2CE32E322494337000EF251 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2CE32E222494337000EF251 /* Preferences.storyboard */; };
+		B2CE32E5224943FE000EF251 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32E4224943FE000EF251 /* PreferencesWindowController.swift */; };
+		B2CE32E722494785000EF251 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32E622494785000EF251 /* PreferenceViewController.swift */; };
+		B2CE32EA22494906000EF251 /* PreferenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32E922494906000EF251 /* PreferenceModel.swift */; };
+		B2CE32ED22494E5E000EF251 /* BeautifulLayout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2CE32EC22494E5E000EF251 /* BeautifulLayout.storyboard */; };
+		B2CE32EF22494E8E000EF251 /* BeautifulWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32EE22494E8E000EF251 /* BeautifulWindow.swift */; };
+		B2CE32F1224951AF000EF251 /* BeautifulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32F0224951AF000EF251 /* BeautifulViewController.swift */; };
+		B2CE32F322495751000EF251 /* MenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE32F222495751000EF251 /* MenuDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B21A19CC224A92A00001EEC0 /* WindowDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowDelegate.swift; sourceTree = "<group>"; };
 		B2C20A9522463DC800A8AF92 /* Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C20A9822463DC800A8AF92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2C20A9A22463DC800A8AF92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +39,14 @@
 		B2C20AAE2246528000A8AF92 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		B2C20AB022465A5E00A8AF92 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		B2C20AB22246647300A8AF92 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		B2CE32E222494337000EF251 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		B2CE32E4224943FE000EF251 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		B2CE32E622494785000EF251 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		B2CE32E922494906000EF251 /* PreferenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceModel.swift; sourceTree = "<group>"; };
+		B2CE32EC22494E5E000EF251 /* BeautifulLayout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BeautifulLayout.storyboard; sourceTree = "<group>"; };
+		B2CE32EE22494E8E000EF251 /* BeautifulWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeautifulWindow.swift; sourceTree = "<group>"; };
+		B2CE32F0224951AF000EF251 /* BeautifulViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeautifulViewController.swift; sourceTree = "<group>"; };
+		B2CE32F222495751000EF251 /* MenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +79,9 @@
 		B2C20A9722463DC800A8AF92 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				B2CE32EB22494E2E000EF251 /* Beautiful Layout */,
+				B2CE32E8224948F5000EF251 /* Model */,
+				B2CE32E12249431E000EF251 /* Preferences */,
 				B2C20A9822463DC800A8AF92 /* AppDelegate.swift */,
 				B2C20AAE2246528000A8AF92 /* Task.swift */,
 				B2C20AAC22464CF700A8AF92 /* EventMonitor.swift */,
@@ -71,8 +92,38 @@
 				B2C20AB22246647300A8AF92 /* OptionViewController.swift */,
 				B2C20AA122463DC900A8AF92 /* Info.plist */,
 				B2C20AA222463DC900A8AF92 /* Todos.entitlements */,
+				B2CE32F222495751000EF251 /* MenuDelegate.swift */,
 			);
 			path = Todos;
+			sourceTree = "<group>";
+		};
+		B2CE32E12249431E000EF251 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				B2CE32E4224943FE000EF251 /* PreferencesWindowController.swift */,
+				B2CE32E622494785000EF251 /* PreferenceViewController.swift */,
+				B2CE32E222494337000EF251 /* Preferences.storyboard */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		B2CE32E8224948F5000EF251 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B2CE32E922494906000EF251 /* PreferenceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B2CE32EB22494E2E000EF251 /* Beautiful Layout */ = {
+			isa = PBXGroup;
+			children = (
+				B2CE32EE22494E8E000EF251 /* BeautifulWindow.swift */,
+				B2CE32F0224951AF000EF251 /* BeautifulViewController.swift */,
+				B2CE32EC22494E5E000EF251 /* BeautifulLayout.storyboard */,
+				B21A19CC224A92A00001EEC0 /* WindowDelegate.swift */,
+			);
+			path = "Beautiful Layout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +184,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2CE32ED22494E5E000EF251 /* BeautifulLayout.storyboard in Resources */,
+				B2CE32E322494337000EF251 /* Preferences.storyboard in Resources */,
 				B2C20A9D22463DC900A8AF92 /* Assets.xcassets in Resources */,
 				B2C20AA022463DC900A8AF92 /* Main.storyboard in Resources */,
 			);
@@ -146,11 +199,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2C20AAF2246528000A8AF92 /* Task.swift in Sources */,
+				B2CE32F1224951AF000EF251 /* BeautifulViewController.swift in Sources */,
 				B2C20AB122465A5E00A8AF92 /* NewTaskViewController.swift in Sources */,
 				B2C20AAD22464CF700A8AF92 /* EventMonitor.swift in Sources */,
 				B2C20A9B22463DC800A8AF92 /* ViewController.swift in Sources */,
+				B2CE32F322495751000EF251 /* MenuDelegate.swift in Sources */,
+				B2CE32E5224943FE000EF251 /* PreferencesWindowController.swift in Sources */,
+				B21A19CD224A92A00001EEC0 /* WindowDelegate.swift in Sources */,
 				B2C20A9922463DC800A8AF92 /* AppDelegate.swift in Sources */,
 				B2C20AB32246647300A8AF92 /* OptionViewController.swift in Sources */,
+				B2CE32EF22494E8E000EF251 /* BeautifulWindow.swift in Sources */,
+				B2CE32EA22494906000EF251 /* PreferenceModel.swift in Sources */,
+				B2CE32E722494785000EF251 /* PreferenceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
